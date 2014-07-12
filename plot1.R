@@ -1,8 +1,8 @@
 setwd("~/Desktop/job/JHDS/Expl_Data_Analysis/")
 
-# preallocate memory to read huge file
+## preallocate memory to read huge file
 t<-data.frame(cbind(character(2075259),character(2075259),numeric(2075259),numeric(2075259),numeric(2075259),numeric(2075259),numeric(2075259),numeric(2075259),numeric(2075259)))
-#colnames(t)<-c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3")
+
 t<-read.table("household_power_consumption.txt", header=TRUE, sep=";", colClasses=c("character"))
 #subset to desired 2 days for assignment
 r<-t[t$Date=="2/2/2007",]
