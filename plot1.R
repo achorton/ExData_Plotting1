@@ -7,7 +7,7 @@ t<-read.table("household_power_consumption.txt", header=TRUE, sep=";", colClasse
 #subset to desired 2 days for assignment
 r<-t[t$Date=="2/2/2007",]
 r2<-t[t$Date=="1/2/2007",]
-power<-as.data.frame(rbind(r,r2))
+power<-as.data.frame(rbind(r2,r))
 #free up memory
 rm(t,r,r2)
 
