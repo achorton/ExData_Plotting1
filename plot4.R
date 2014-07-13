@@ -1,5 +1,3 @@
-#install.packages("plotrix",repos="http://cran.wustl.edu")
-#library(plotrix)
 setwd("~/Desktop/job/JHDS/ExData_Plotting1/")
 
 ## preallocate memory to read huge file
@@ -68,11 +66,6 @@ plot(cbind(power$datetime,
      yaxp=c(0,30,3),
      ylim=c(0,max(power$Sub_metering_1)),
      type="l")
-#legend("topright",col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),bty="n",lty=1)
-#legend("topright",col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),box.lwd=0)
-#legend("topright",col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),bty="o",)
-#legend("topright",legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),bty="n",col=c("black","red","blue"))
-
 par(new=TRUE)
 plot(cbind(power$datetime,
      power$Sub_metering_2),
@@ -120,7 +113,5 @@ plot(cbind(power$datetime,
      type="l")
 
 axis(1, at=c(min(power$datetime[power$Date=="2007-02-01"]),mean(power$datetime),max(power$datetime[power$Date=="2007-02-02"])),labels=c("Thu", "Fri", "Sat"))
-
-
 
 dev.off()
