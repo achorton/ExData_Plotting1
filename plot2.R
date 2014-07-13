@@ -53,8 +53,6 @@ plot(cbind(power$datetime,
      xlab="",
      ylab="Global Active Power (kilowatts)",
      xaxt="n",
-#     xaxp=c(mean(power$datetime[power$Date=="2007-02-01"]),
-#         mean(power$datetime[power$Date=="2007-02-02"]),2),
      yaxp=c(0,6,3),
      type="l")
 

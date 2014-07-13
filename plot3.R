@@ -1,3 +1,5 @@
+#install.packages("plotrix",repos="http://cran.wustl.edu")
+#library(plotrix)
 setwd("~/Desktop/job/JHDS/ExData_Plotting1/")
 
 ## preallocate memory to read huge file
@@ -7,7 +9,7 @@ t<-read.table("household_power_consumption.txt", header=TRUE, sep=";", colClasse
 #subset to desired 2 days for assignment
 r<-t[t$Date=="2/2/2007",]
 r2<-t[t$Date=="1/2/2007",]
-power<-as.data.frame(rbind(r,r2))
+power<-as.data.frame(rbind(r2,r))
 #free up memory
 rm(t,r,r2)
 
@@ -43,39 +45,41 @@ power$Sub_metering_2<-as.numeric(power$Sub_metering_2)
 power$Sub_metering_3[power$Sub_metering_3=="?"]<-"NA"
 power$Sub_metering_3<-as.numeric(power$Sub_metering_3)
 
-png(filename = "plot1.png")
-hist(power$Global_active_power,
-     breaks=c(0,0.5,
-              1,1.5,
-              2,2.5,
-              3,3.5,
-              4,4.5,
-              5,5.5,
-              6,6.5,
-              7,7.5),
-     right = FALSE,
-     col="red",
-     main="Global Active Power",
-     xlab="Global Active Power (kilowatts)",
-     ylab="Frequency",
-#     xlim=c(0,7.5),
-#     ylim=c(0,1234),
-     xaxp=c(0,6,3),
-     yaxp=c(0,1200,6)
-#     ,
-#     asp=2
-     )
+# Open device, configure and plot histogram, write and close device
+png(filename = "plot3.png")
 
-    
-pin(c(w,h))
-xpd=TRUE    
-     axes = TRUE, plot = TRUE, labels = FALSE,
-     nclass = NULL, warn.unused = TRUE, ...)
+plot(cbind(power$datetime,
+     power$Sub_metering_1),
+     xlab="",
+     ylab="Energy sub metering",
+     xaxt="n",
+     yaxp=c(0,30,3),
+     ylim=c(0,max(power$Sub_metering_1)),
+     type="l")
+legend("topright",col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+par(new=TRUE)
+plot(cbind(power$datetime,
+     power$Sub_metering_2),
+     xlab="",
+     ylab="Energy sub metering",
+     xaxt="n",
+     yaxp=c(0,30,3),
+     type="l",
+     ylim=c(0,max(power$Sub_metering_1)),
+     col="red")
+par(new=TRUE)
+plot(cbind(power$datetime,
+     power$Sub_metering_3),
+     xlab="",
+     ylab="Energy sub metering",
+     xaxt="n",
+     yaxp=c(0,6,3),
+     type="l",
+     ylim=c(0,max(power$Sub_metering_1)),
+     col="blue")
 
+axis(1, at=c(min(power$datetime[power$Date=="2007-02-01"]),mean(power$datetime),max(power$datetime[power$Date=="2007-02-02"])),labels=c("Thu", "Fri", "Sat"))
 
-png(filename = "plot1.png",
-    width = 480, height = 480, units = "px", pointsize = 12,
-     bg = "white",  res = NA, ...,
-    type = c("cairo", "cairo-png", "Xlib", "quartz"), antialias)
+legend("topright",col=c("black","red","blue"),legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),lty=1)
 
 dev.off()
